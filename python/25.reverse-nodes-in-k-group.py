@@ -115,4 +115,32 @@ class Solution:
             cur = prev
 
 
+# review
+class Solution:
+    def reverseKGroup(
+        self, head: Optional[ListNode], k: int
+    ) -> Optional[ListNode]:
+        dummy_head = ListNode(0)
+        dummy_head.next = head
+        cur = dummy_head
+        n = 0
+
+        while cur.next:
+            n += 1
+            cur = cur.next
+        r = n // k
+        cur = dummy_head
+        for i in range(r):
+            pre = cur
+            tail = cur.next
+            for _ in range(k):
+                move = cur.next
+                cur.next = cur.next.next
+                move.next = pre.next
+                pre.next = move
+                cur = tail
+
+        return dummy_head.next
+
+
 # @lc code=end
